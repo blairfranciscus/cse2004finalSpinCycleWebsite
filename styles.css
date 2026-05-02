@@ -793,17 +793,15 @@ p {
 
 .hero-stage {
   position: relative;
+  display: grid;
   width: min(980px, 100%);
-  min-height: 580px;
+  min-height: 540px;
+  place-items: center;
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 22%),
-    radial-gradient(circle at 64% 58%, rgba(255, 255, 255, 0.1), transparent 18rem),
-    radial-gradient(circle at 82% 18%, rgba(0, 212, 255, 0.08), transparent 16rem),
-    linear-gradient(180deg, #11141b, #07080c 62%, #050507);
-  box-shadow: var(--shadow);
+  border: 0;
+  border-radius: 0;
+  background: #000;
+  box-shadow: none;
   opacity: 0;
   transform: translateY(22px) scale(0.985);
   transition: opacity 800ms ease, transform 800ms ease;
@@ -818,211 +816,86 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 75%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.045), transparent 46%);
+  pointer-events: none;
 }
 
-.led-wall {
-  position: absolute;
-  top: 54px;
-  left: 48px;
-  right: 48px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  color: rgba(255, 255, 255, 0.08);
-  font-family: "Space Grotesk", Inter, sans-serif;
-  font-size: clamp(1.8rem, 5vw, 4.5rem);
-  font-weight: 900;
-  line-height: 0.9;
-  text-transform: uppercase;
-  opacity: 0;
-  transition: opacity 900ms ease 120ms;
-  filter: blur(0.2px);
-}
-
-.led-wall.is-visible {
-  opacity: 1;
-}
-
-.led-wall span:nth-child(1) {
-  color: rgba(0, 212, 255, 0.18);
-}
-
-.led-wall span:nth-child(2) {
-  color: rgba(255, 255, 255, 0.12);
-}
-
-.led-wall span:nth-child(3) {
-  color: rgba(45, 248, 160, 0.14);
-}
-
-.led-wall span:nth-child(4) {
-  color: rgba(255, 255, 255, 0.1);
-}
-
-.bike-silhouette {
-  position: absolute;
-  right: -18px;
-  bottom: 26px;
-  width: min(820px, 108%);
+.trace-bike {
+  position: relative;
+  z-index: 1;
+  width: min(96%, 900px);
+  height: auto;
   overflow: visible;
-  filter:
-    drop-shadow(0 28px 32px rgba(0, 0, 0, 0.42))
-    drop-shadow(0 0 18px rgba(0, 212, 255, 0.08));
 }
 
-.bike-silhouette line,
-.bike-silhouette path,
-.bike-silhouette rect,
-.bike-silhouette circle {
+.trace-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.94);
+  stroke-width: 4;
   stroke-linecap: round;
   stroke-linejoin: round;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  opacity: 0;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
 }
 
-.bike-silhouette .bike-shadow {
-  fill: rgba(0, 0, 0, 0.34);
+.hero-stage.is-visible .trace-line {
+  animation-name: traceBikeLine, traceBikeFade;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1), ease;
 }
 
-.bike-silhouette .stabilizer {
-  fill: rgba(255, 255, 255, 0.06);
-  stroke: rgba(246, 248, 255, 0.18);
-  stroke-width: 2;
+.trace-ground {
+  animation-duration: 1.35s, 360ms;
+  animation-delay: 120ms, 120ms;
 }
 
-.bike-silhouette .transport-wheel {
-  fill: rgba(8, 10, 14, 0.9);
-  stroke: rgba(246, 248, 255, 0.18);
-  stroke-width: 3;
+.trace-back-wheel {
+  animation-duration: 1.65s, 360ms;
+  animation-delay: 520ms, 520ms;
 }
 
-.bike-silhouette .front-fork,
-.bike-silhouette .main-beam,
-.bike-silhouette .seat-tube,
-.bike-silhouette .rear-stay,
-.bike-silhouette .rear-leg {
-  fill: rgba(12, 16, 22, 0.82);
-  stroke: rgba(246, 248, 255, 0.22);
-  stroke-width: 3;
+.trace-frame {
+  animation-duration: 2.25s, 360ms;
+  animation-delay: 1.28s, 1.28s;
 }
 
-.bike-silhouette .body-inset {
-  fill: rgba(0, 212, 255, 0.12);
-  stroke: rgba(246, 248, 255, 0.12);
-  stroke-width: 1.5;
+.trace-crank {
+  animation-duration: 1s, 300ms;
+  animation-delay: 2.1s, 2.1s;
 }
 
-.bike-silhouette .handlebar-post,
-.bike-silhouette .console-arm,
-.bike-silhouette .seat-post {
-  fill: rgba(16, 21, 28, 0.84);
-  stroke: rgba(246, 248, 255, 0.2);
-  stroke-width: 2.5;
+.trace-seat {
+  animation-duration: 900ms, 280ms;
+  animation-delay: 2.62s, 2.62s;
 }
 
-.bike-silhouette .bike-console {
-  fill: rgba(8, 11, 16, 0.92);
-  stroke: rgba(0, 212, 255, 0.35);
-  stroke-width: 2;
-  box-shadow: 0 0 12px rgba(0, 212, 255, 0.18);
+.trace-fork {
+  animation-duration: 1.15s, 300ms;
+  animation-delay: 3.05s, 3.05s;
 }
 
-.bike-silhouette .handlebars {
-  fill: none;
-  stroke: rgba(246, 248, 255, 0.86);
-  stroke-width: 8;
-  filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.14));
+.trace-handlebar {
+  animation-duration: 1.45s, 320ms;
+  animation-delay: 3.22s, 3.22s;
 }
 
-.bike-silhouette .saddle {
-  fill: rgba(15, 20, 27, 0.94);
-  stroke: rgba(246, 248, 255, 0.24);
-  stroke-width: 2.5;
+.trace-front-wheel {
+  animation-duration: 1.7s, 360ms;
+  animation-delay: 3.48s, 3.48s;
 }
 
-.bike-silhouette .front-shroud {
-  fill: rgba(10, 13, 18, 0.9);
-  stroke: rgba(246, 248, 255, 0.22);
-  stroke-width: 3;
+@keyframes traceBikeLine {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
-.bike-silhouette .chain-guard {
-  fill: rgba(14, 19, 26, 0.88);
-  stroke: rgba(246, 248, 255, 0.18);
-  stroke-width: 3;
-}
-
-.bike-silhouette .flywheel.outer {
-  fill: rgba(8, 11, 16, 0.82);
-  stroke: rgba(246, 248, 255, 0.24);
-  stroke-width: 4;
-}
-
-.bike-silhouette .flywheel.inner {
-  fill: none;
-  stroke: rgba(0, 212, 255, 0.34);
-  stroke-width: 3;
-  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.16));
-}
-
-.bike-silhouette .flywheel.core {
-  fill: rgba(246, 248, 255, 0.72);
-}
-
-.bike-silhouette .crank.outer {
-  fill: rgba(10, 13, 18, 0.92);
-  stroke: rgba(246, 248, 255, 0.2);
-  stroke-width: 3;
-}
-
-.bike-silhouette .crank.inner {
-  fill: rgba(246, 248, 255, 0.6);
-}
-
-.bike-silhouette .crank-arm {
-  stroke: rgba(246, 248, 255, 0.5);
-  stroke-width: 5;
-}
-
-.bike-silhouette .pedal-arm {
-  stroke: rgba(246, 248, 255, 0.54);
-  stroke-width: 4;
-}
-
-.bike-silhouette .pedal-platform {
-  fill: rgba(10, 13, 18, 0.92);
-  stroke: rgba(246, 248, 255, 0.24);
-  stroke-width: 2;
-}
-
-.bike-silhouette .accent-bottle {
-  fill: rgba(45, 248, 160, 0.72);
-  filter: drop-shadow(0 0 8px rgba(45, 248, 160, 0.24));
-}
-
-.bike-silhouette .accent-stripe {
-  fill: rgba(255, 59, 127, 0.78);
-}
-
-.bike-silhouette .accent-knob {
-  fill: var(--acid);
-  filter: drop-shadow(0 0 8px rgba(215, 255, 56, 0.3));
-}
-
-.studio-floor {
-  position: absolute;
-  right: -10%;
-  bottom: -68px;
-  left: -10%;
-  height: 180px;
-  transform: perspective(360px) rotateX(62deg);
-  background:
-    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent),
-    repeating-linear-gradient(90deg, transparent 0 66px, rgba(255, 255, 255, 0.05) 67px 68px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+@keyframes traceBikeFade {
+  to {
+    opacity: 1;
+  }
 }
 
 .content-page {
@@ -1072,13 +945,13 @@ p {
 
 .bike-diagram {
   min-height: 450px;
-  padding: 22px;
-  background:
-    radial-gradient(circle at 50% 45%, rgba(0, 212, 255, 0.12), transparent 22rem),
-    rgba(255, 255, 255, 0.035);
+  padding: 0;
+  overflow: hidden;
+  background: #000;
 }
 
 .bike-diagram svg {
+  display: block;
   width: 100%;
   height: 100%;
   min-height: 400px;
@@ -1087,33 +960,56 @@ p {
 .diagram-bike circle,
 .diagram-bike path {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.38);
-  stroke-width: 11;
+  stroke: rgba(255, 255, 255, 0.94);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.48));
+}
+
+.diagram-bike .diagram-ground {
+  stroke-width: 3;
+}
+
+.diagram-bike .diagram-front-inner {
+  opacity: 0.92;
+}
+
+.diagram-callout .callout-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .hotspot {
-  fill: rgba(0, 212, 255, 0.18);
-  stroke: var(--blue);
+  fill: #000;
+  stroke: rgba(255, 255, 255, 0.96);
   stroke-width: 4;
   transition: 220ms ease;
   cursor: pointer;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.42));
 }
 
 .hotspot:hover,
 .hotspot.active {
-  fill: rgba(255, 59, 127, 0.35);
-  stroke: var(--pink);
-  filter: drop-shadow(0 0 12px rgba(255, 59, 127, 0.8));
+  fill: rgba(238, 245, 39, 0.18);
+  stroke: var(--pill-yellow);
+  filter: drop-shadow(0 0 12px rgba(238, 245, 39, 0.82));
 }
 
 .bike-diagram text {
-  fill: var(--text);
-  font-size: 22px;
-  font-weight: 800;
-  text-anchor: middle;
+  fill: rgba(255, 255, 255, 0.96);
+  font-family: "Space Grotesk", Inter, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  text-anchor: start;
   text-transform: uppercase;
+  paint-order: stroke;
+  stroke: rgba(0, 0, 0, 0.72);
+  stroke-width: 4px;
+  stroke-linejoin: round;
 }
 
 .part-panel,
@@ -2023,19 +1919,6 @@ p {
   .home-gear-intro {
     padding: 14px;
     border-radius: 22px;
-  }
-
-  .led-wall {
-    left: 18px;
-    right: 18px;
-    top: 34px;
-    gap: 8px;
-  }
-
-  .bike-silhouette {
-    right: -34px;
-    bottom: 18px;
-    width: 120%;
   }
 
   .metric-grid,

@@ -32,7 +32,6 @@
         { id: "wireframe", short: "Plan", label: "Wireframe", eyebrow: "WF" },
       ];
 
-      const neonWords = ["DIG DEEP", "BE HERE", "STAY MOVING", "POWER THROUGH"];
       const logoSpokes = Array.from({ length: 10 }, (_, index) => index);
 
       const bikeParts = [
@@ -622,14 +621,8 @@
                 <button className="primary-cta" onClick={onStart}>Enter Ride Lab</button>
               </div>
             </div>
-            <div className={`hero-stage ${gear >= 1 ? "is-visible" : ""}`} aria-label="Stylized indoor cycling bike with moving wheel">
-              <div className={`led-wall ${gear >= 1 ? "is-visible" : ""}`}>
-                {neonWords.map((word) => (
-                  <span key={word}>{word}</span>
-                ))}
-              </div>
-              <BikeSilhouette />
-              <div className="studio-floor"></div>
+            <div className={`hero-stage ${gear >= 1 ? "is-visible" : ""}`} aria-label="Animated white line drawing of a bicycle">
+              <TraceBike />
             </div>
           </section>
         );
@@ -808,59 +801,20 @@
         );
       }
 
-      function BikeSilhouette() {
+      function TraceBike() {
         return (
-          <svg className="bike-silhouette" viewBox="0 0 820 430" role="img" aria-label="Indoor cycling bike illustration">
-            <ellipse className="bike-shadow" cx="408" cy="362" rx="260" ry="24" />
-
-            <g className="bike-base">
-              <path className="stabilizer front" d="M128 334 L322 334 L340 350 L146 350 Z" />
-              <path className="stabilizer rear" d="M474 336 L704 336 L721 352 L491 352 Z" />
-              <circle className="transport-wheel" cx="164" cy="352" r="8" />
-              <circle className="transport-wheel" cx="300" cy="352" r="8" />
-              <circle className="transport-wheel" cx="517" cy="354" r="8" />
-              <circle className="transport-wheel" cx="685" cy="354" r="8" />
-            </g>
-
-            <g className="bike-frame">
-              <path className="front-fork" d="M284 246 L249 334 L225 334 L259 246 Z" />
-              <path className="main-beam" d="M285 246 L413 214 L500 250 L396 282 L301 279 Z" />
-              <path className="seat-tube" d="M412 214 L455 154 L476 160 L449 243 L420 246 Z" />
-              <path className="rear-stay" d="M450 243 L568 278 L548 299 L427 273 Z" />
-              <path className="rear-leg" d="M548 299 L580 336 L551 336 L523 301 Z" />
-              <path className="body-inset" d="M319 255 L399 229 L454 252 L393 271 Z" />
-            </g>
-
-            <g className="bike-cockpit">
-              <path className="handlebar-post" d="M312 177 L281 124 L295 116 L329 167 Z" />
-              <path className="console-arm" d="M283 124 L238 117 L238 129 L281 135 Z" />
-              <rect className="bike-console" x="216" y="103" width="38" height="24" rx="4" transform="rotate(-6 216 103)" />
-              <path className="handlebars" d="M238 119 Q208 107 177 111 Q159 114 146 126 Q159 133 179 132 L222 132 Q241 131 249 124" />
-              <path className="seat-post" d="M455 154 L469 109 L482 112 L468 159 Z" />
-              <path className="saddle" d="M447 103 Q476 95 512 101 Q502 115 476 120 Q454 123 442 115 Z" />
-            </g>
-
-            <g className="drive-system">
-              <circle className="flywheel outer" cx="248" cy="282" r="88" />
-              <circle className="flywheel inner" cx="248" cy="282" r="61" />
-              <circle className="flywheel core" cx="248" cy="282" r="14" />
-              <path className="front-shroud" d="M206 205 Q174 232 165 281 Q170 335 223 350 L292 350 Q327 336 333 290 Q329 239 289 208 Z" />
-              <path className="chain-guard" d="M301 231 Q349 215 389 238 Q416 255 424 289 Q411 315 382 324 L306 324 Q286 303 290 268 Q291 244 301 231 Z" />
-              <circle className="crank outer" cx="356" cy="278" r="26" />
-              <circle className="crank inner" cx="356" cy="278" r="8" />
-              <line className="crank-arm" x1="356" y1="278" x2="392" y2="249" />
-              <line className="crank-arm" x1="356" y1="278" x2="320" y2="307" />
-              <line className="pedal-arm" x1="392" y1="249" x2="411" y2="249" />
-              <line className="pedal-arm" x1="320" y1="307" x2="300" y2="307" />
-              <rect className="pedal-platform" x="410" y="244" width="32" height="10" rx="4" />
-              <rect className="pedal-platform" x="270" y="302" width="32" height="10" rx="4" />
-            </g>
-
-            <g className="bike-accents">
-              <path className="accent-bottle" d="M430 191 L448 195 L441 224 L424 220 Z" />
-              <path className="accent-stripe" d="M531 304 L546 309 L531 335 L516 330 Z" />
-              <circle className="accent-knob" cx="431" cy="226" r="6" />
-            </g>
+          <svg className="trace-bike" viewBox="0 0 1536 1024" role="img" aria-label="Animated minimalist white bicycle line drawing">
+            <path className="trace-line trace-ground" pathLength="1" d="M -18 912 C 92 912, 202 912, 318 912 C 445 912, 510 909, 558 873 C 594 846, 621 805, 650 760 C 680 713, 708 703, 739 737 C 785 789, 820 852, 928 890 C 1006 917, 1093 909, 1208 910 C 1312 911, 1408 914, 1514 912" />
+            <circle className="trace-line trace-back-wheel" pathLength="1" cx="363" cy="684" r="214" />
+            <path className="trace-line trace-frame" pathLength="1" d="M 358 692 L 559 386 L 654 724 L 936 444 L 918 332 M 559 386 C 595 350, 598 278, 528 242 M 578 373 C 710 344, 816 333, 918 333 M 358 692 L 654 724 M 654 724 L 936 444" />
+            <circle className="trace-line trace-crank" pathLength="1" cx="656" cy="724" r="67" />
+            <circle className="trace-line trace-crank" pathLength="1" cx="656" cy="724" r="48" />
+            <path className="trace-line trace-crank trace-crank-arm" pathLength="1" d="M 656 724 L 606 772" />
+            <path className="trace-line trace-seat" pathLength="1" d="M 494 193 C 522 177, 568 200, 616 213 C 662 226, 703 226, 732 238 C 713 257, 655 259, 615 278 C 574 298, 558 347, 559 386 C 560 437, 591 469, 610 530 C 629 590, 640 666, 650 724" />
+            <circle className="trace-line trace-front-wheel" pathLength="1" cx="1067" cy="684" r="214" />
+            <path className="trace-line trace-front-wheel trace-front-inner" pathLength="1" d="M 966 501 C 895 579, 873 769, 1062 901" />
+            <path className="trace-line trace-fork" pathLength="1" d="M 918 332 L 936 444 C 951 542, 1004 641, 1115 711 M 967 508 C 913 572, 884 735, 1064 902" />
+            <path className="trace-line trace-handlebar" pathLength="1" d="M 918 332 L 916 239 C 980 235, 1078 236, 1110 274 C 1150 321, 1115 395, 1016 390 L 1016 360 C 1083 374, 1120 318, 1082 280 C 1048 247, 972 253, 947 257 L 947 443" />
           </svg>
         );
       }
@@ -922,8 +876,8 @@
               <div className={`posture-demo ${position}`}>
                 <img
                   className="posture-photo"
-                  src="./spin picture.png"
-                  alt="Reference photo showing standing and seated cycling positions"
+                  src="./seated-standing-positions.png"
+                  alt="Illustrated seated and standing cycling position guide"
                 />
               </div>
             </div>
@@ -958,29 +912,65 @@
       }
 
       function BikeDiagram({ activePart, onSelect }) {
+        const diagramTargets = {
+          saddle: {
+            cx: 382,
+            cy: 138,
+            labelX: 432,
+            labelY: 82,
+            leader: "M382 138 L414 74 L432 74",
+          },
+          bars: {
+            cx: 676,
+            cy: 150,
+            labelX: 737,
+            labelY: 98,
+            leader: "M676 150 L710 92 L737 92",
+          },
+          knob: {
+            cx: 672,
+            cy: 194,
+            labelX: 542,
+            labelY: 176,
+            leader: "M672 194 L626 176 L610 176",
+          },
+          pedals: {
+            cx: 468,
+            cy: 374,
+            labelX: 464,
+            labelY: 306,
+            leader: "M468 374 L495 312",
+          },
+        };
+
         return (
           <div className="bike-diagram">
-            <svg viewBox="0 0 760 430" aria-label="Clickable bike setup diagram">
+            <svg viewBox="0 0 960 540" aria-label="Clickable bike setup diagram">
               <g className="diagram-bike">
-                <circle cx="255" cy="290" r="88" />
-                <circle cx="545" cy="290" r="88" />
-                <path d="M255 290 L360 170 L450 290 L545 290 L462 170 L360 170 L255 290" />
-                <path d="M360 170 L345 128 L430 128" />
-                <path d="M462 170 L520 106 L612 112" />
-                <path d="M520 106 L592 84" />
-                <circle cx="405" cy="246" r="19" />
-                <path d="M405 246 L450 220" />
+                <path className="diagram-ground" d="M65 505 C192 505, 290 505, 378 505 C444 505, 477 478, 512 430 C538 396, 558 392, 583 424 C624 477, 664 505, 752 505 C820 505, 872 505, 910 505" />
+                <circle cx="286" cy="378" r="126" />
+                <circle cx="696" cy="378" r="126" />
+                <path d="M286 378 L392 224 L432 374 L286 378 M432 374 L642 224 L682 184 M392 224 C488 220, 582 214, 682 206 M682 206 L682 184 L432 374" />
+                <path d="M392 224 C420 256, 432 315, 432 374 M392 224 C413 190, 410 155, 382 138" />
+                <path d="M340 130 C363 112, 390 132, 425 136 C462 140, 480 138, 492 148 C474 164, 434 157, 411 170 C394 180, 391 202, 392 224" />
+                <circle cx="432" cy="374" r="42" />
+                <circle cx="432" cy="374" r="28" />
+                <path d="M432 374 L468 374" />
+                <path d="M682 184 L684 252 C692 314, 728 382, 762 411 M704 236 C656 282, 634 418, 752 505" />
+                <path d="M682 184 L676 123 C728 116, 782 121, 796 156 C812 196, 773 225, 721 214 L721 194 C753 203, 783 186, 778 158 C772 130, 718 132, 696 136 L696 184" />
+                <path className="diagram-front-inner" d="M704 236 C656 282, 634 418, 752 505" />
               </g>
               {bikeParts.map((part) => (
-                <g key={part.id}>
+                <g className="diagram-callout" key={part.id}>
+                  <path className="callout-line" d={diagramTargets[part.id].leader} />
                   <circle
                     className={`hotspot ${activePart.id === part.id ? "active" : ""}`}
-                    cx={`${part.x}%`}
-                    cy={`${part.y}%`}
-                    r="18"
+                    cx={diagramTargets[part.id].cx}
+                    cy={diagramTargets[part.id].cy}
+                    r="10"
                     onClick={() => onSelect(part)}
                   />
-                  <text x={`${part.x}%`} y={`${part.y - 7}%`}>{part.label}</text>
+                  <text x={diagramTargets[part.id].labelX} y={diagramTargets[part.id].labelY}>{part.label}</text>
                 </g>
               ))}
             </svg>
