@@ -22,14 +22,13 @@
       const { useEffect, useMemo, useRef, useState } = React;
       const PLAYLIST_STORAGE_KEY = "rideLabPlaylist";
 
-      const pageOrder = ["home", "set", "beat", "movement", "finish", "wireframe"];
+      const pageOrder = ["home", "set", "beat", "movement", "finish"];
       const mainPages = [
         { id: "home", short: "Lab", label: "Ride Lab", eyebrow: "00" },
         { id: "set", short: "Set", label: "Set the Ride", eyebrow: "01" },
         { id: "beat", short: "Beat", label: "Build the Beat", eyebrow: "02" },
         { id: "movement", short: "Move", label: "Lead Movement", eyebrow: "03" },
         { id: "finish", short: "Lap", label: "The Final Lap", eyebrow: "04" },
-        { id: "wireframe", short: "Plan", label: "Wireframe", eyebrow: "WF" },
       ];
 
       const logoSpokes = Array.from({ length: 10 }, (_, index) => index);
@@ -516,7 +515,6 @@
               {page === "beat" && <BuildBeatPage />}
               {page === "movement" && <MovementPage />}
               {page === "finish" && <FinishPage />}
-              {page === "wireframe" && <WireframeRoute />}
             </main>
           </div>
         );
