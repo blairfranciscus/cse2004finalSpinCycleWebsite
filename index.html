@@ -833,6 +833,32 @@
         const [activePart, setActivePart] = useState(bikeParts[0]);
         const [position, setPosition] = useState("seated");
         const [activeLanguage, setActiveLanguage] = useState(language[0]);
+        const formNotes = {
+          seated: [
+            {
+              title: "Downstroke",
+              body: "Lengthen through the leg as you press down.",
+            },
+            {
+              title: "Upstroke",
+              body: "Recover smoothly with a soft, controlled bend.",
+            },
+          ],
+          standing: [
+            {
+              title: "Hips lifted",
+              body: "Lift hips off the saddle.",
+            },
+            {
+              title: "Hands on handlebars",
+              body: "Maintain a strong grip.",
+            },
+            {
+              title: "Drive through legs",
+              body: "Push down and pull up to generate power.",
+            },
+          ],
+        };
 
         return (
           <section className="content-page set-page">
@@ -872,12 +898,23 @@
                     Standing
                   </button>
                 </div>
+                <div className={`form-notes ${position}`} key={`${position}-notes`}>
+                  {formNotes[position].map((note) => (
+                    <article className="form-note" key={note.title}>
+                      <div>
+                        <h4>{note.title}</h4>
+                        <p>{note.body}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
               <div className={`posture-demo ${position}`}>
                 <img
-                  className="posture-photo"
-                  src="./seated-standing-positions.png"
-                  alt="Illustrated seated and standing cycling position guide"
+                  key={position}
+                  className="posture-photo posture-bike-photo"
+                  src={position === "seated" ? "./seated-bike-only.png" : "./standing-bike-only.png"}
+                  alt={position === "seated" ? "Illustrated seated cycling position" : "Illustrated standing cycling position"}
                 />
               </div>
             </div>
