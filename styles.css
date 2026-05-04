@@ -389,7 +389,7 @@ main {
 }
 
 .hero-copy {
-  max-width: 720px;
+  max-width: min(980px, 100%);
   display: grid;
   justify-items: center;
   text-align: center;
@@ -794,13 +794,13 @@ p {
 .hero-stage {
   position: relative;
   display: grid;
-  width: min(980px, 100%);
-  min-height: 540px;
+  width: min(1180px, calc(100vw - 24px));
+  min-height: clamp(440px, 58vw, 700px);
   place-items: center;
-  overflow: hidden;
+  overflow: visible;
   border: 0;
   border-radius: 0;
-  background: #000;
+  background: transparent;
   box-shadow: none;
   opacity: 0;
   transform: translateY(22px) scale(0.985);
@@ -815,17 +815,18 @@ p {
 .hero-stage::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.045), transparent 46%);
+  inset: 8% 2%;
+  background: radial-gradient(circle at 50% 54%, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.38) 42%, transparent 72%);
   pointer-events: none;
 }
 
 .trace-bike {
   position: relative;
   z-index: 1;
-  width: min(96%, 900px);
+  width: min(112%, 1180px);
   height: auto;
   overflow: visible;
+  transform: translateY(-28px);
 }
 
 .trace-line {

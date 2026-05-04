@@ -608,7 +608,13 @@
                 <BrandLogo large />
               </div>
               <div className={`hero-support ${brandVisible ? "is-visible" : ""}`}>
-                <HomeGearIntro gear={gear} onIncreaseGear={onIncreaseGear} />
+                {gear < 1 ? (
+                  <HomeGearIntro gear={gear} onIncreaseGear={onIncreaseGear} />
+                ) : (
+                  <div className="hero-stage is-visible" aria-label="Animated white line drawing of a bicycle">
+                    <TraceBike />
+                  </div>
+                )}
               </div>
               <div className={`hero-support ${gear >= 1 ? "is-visible" : ""}`}>
                 <p className="tagline">Built on BPM</p>
@@ -618,9 +624,6 @@
                 </p>
                 <button className="primary-cta" onClick={onStart}>Enter Ride Lab</button>
               </div>
-            </div>
-            <div className={`hero-stage ${gear >= 1 ? "is-visible" : ""}`} aria-label="Animated white line drawing of a bicycle">
-              <TraceBike />
             </div>
           </section>
         );
