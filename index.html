@@ -351,21 +351,25 @@
           title: "Gratitude",
           line: "You don't have to, you get to.",
           ritual: "Dim lights, slow the room down, and finish by treating your body like it belongs to someone you love.",
+          song: "Iris - The Goo Goo Dolls",
         },
         empowerment: {
           title: "Empowerment",
           line: "Remind yourself that you can do difficult things.",
           ritual: "Bring the lights up for the last push and coach the room with: you are stronger than you think.",
+          song: "Glorious - Macklemore ft. Skylar Grey",
         },
         release: {
           title: "Release",
           line: "If you can't get out of it, get into it.",
           ritual: "Keep the legs easy, soften the shoulders, and let the long exhale do the work before stretch.",
+          song: "Dancing On My Own - Robyn",
         },
         reflection: {
           title: "Reflection",
           line: "How you do anything is how you do everything.",
           ritual: "Low cadence, steady breath, and one quiet minute to notice what changed before the room resets.",
+          song: "Ribs - Lorde",
         },
       };
 
@@ -1315,11 +1319,45 @@
       function FinishPage() {
         const [mood, setMood] = useState("gratitude");
         const [revealed, setRevealed] = useState([]);
+        const [activeRitual, setActiveRitual] = useState(0);
+        const [completedSteps, setCompletedSteps] = useState([]);
         const affirmations = [
           "You are the gatekeeper to your own success.",
           "Your mind is your strongest muscle.",
           "If you think you can't, change your mind.",
           "Love ya self, boo.",
+        ];
+        const ritualSteps = [
+          {
+            title: "Dim lights",
+            cue: "Signal the room that effort is shifting into reflection.",
+            count: "8 counts",
+          },
+          {
+            title: "Quiet pedal",
+            cue: "Ask riders to let their shoulders drop while the legs keep tracing circles.",
+            count: "30 sec",
+          },
+          {
+            title: "Final ride",
+            cue: "Give one last sentence that ties the class theme back to their body.",
+            count: "1 chorus",
+          },
+          {
+            title: "Slow down",
+            cue: "Coach resistance down first, then cadence, so the room lands safely.",
+            count: "20 sec",
+          },
+          {
+            title: "Stretch",
+            cue: "Move from calves to hips to chest, keeping the language calm and specific.",
+            count: "2 min",
+          },
+          {
+            title: "Breath + clap",
+            cue: "Close with one shared breath, gratitude, and a clean room release.",
+            count: "1 breath",
+          },
         ];
 
         const toggleAffirmation = (index) => {
@@ -1327,6 +1365,13 @@
             current.includes(index) ? current.filter((item) => item !== index) : [...current, index]
           );
         };
+        const toggleStep = (index) => {
+          setCompletedSteps((current) =>
+            current.includes(index) ? current.filter((item) => item !== index) : [...current, index]
+          );
+          setActiveRitual(index);
+        };
+        const progress = Math.round((completedSteps.length / ritualSteps.length) * 100);
 
         return (
           <section className="content-page finish-page">
@@ -1340,12 +1385,9 @@
               <article className="closing-script">
                 <h3>{closingMoods[mood].line}</h3>
                 <p>{closingMoods[mood].ritual}</p>
-                <div className="ending-songs">
-                  <span>Dancing On My Own</span>
-                  <span>These Days</span>
-                  <span>Glorious</span>
-                  <span>Ribs</span>
-                  <span>Iris mood stretch</span>
+                <div className="recommended-song">
+                  <span>Recommended song</span>
+                  <strong>{closingMoods[mood].song}</strong>
                 </div>
               </article>
             </div>
@@ -1362,10 +1404,36 @@
               ))}
             </div>
 
-            <section className="ritual-timeline">
-              {["Dim lights", "Quiet pedal", "Final ride", "Slow down", "Stretch", "Breath + clap"].map((step) => (
-                <span key={step}>{step}</span>
-              ))}
+            <section className="ritual-builder">
+              <div className="ritual-live-card">
+                <p className="eyebrow">Cooldown conductor</p>
+                <h3>{ritualSteps[activeRitual].title}</h3>
+                <p>{ritualSteps[activeRitual].cue}</p>
+                <span>{ritualSteps[activeRitual].count}</span>
+                <div className="ritual-controls">
+                  <button onClick={() => setActiveRitual((current) => Math.max(0, current - 1))}>Previous</button>
+                  <button onClick={() => toggleStep(activeRitual)}>
+                    {completedSteps.includes(activeRitual) ? "Undo step" : "Mark done"}
+                  </button>
+                  <button onClick={() => setActiveRitual((current) => Math.min(ritualSteps.length - 1, current + 1))}>Next</button>
+                </div>
+              </div>
+              <div className="ritual-timeline">
+                <div className="ritual-progress" aria-label={`Ritual progress ${progress}%`}>
+                  <span style={{ width: `${progress}%` }}></span>
+                </div>
+                {ritualSteps.map((step, index) => (
+                  <button
+                    key={step.title}
+                    className={`${activeRitual === index ? "active" : ""} ${completedSteps.includes(index) ? "complete" : ""}`}
+                    onClick={() => toggleStep(index)}
+                  >
+                    <small>{String(index + 1).padStart(2, "0")}</small>
+                    <strong>{step.title}</strong>
+                    <span>{completedSteps.includes(index) ? "Complete" : step.count}</span>
+                  </button>
+                ))}
+              </div>
             </section>
           </section>
         );

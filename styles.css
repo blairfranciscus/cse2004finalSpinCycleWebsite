@@ -1299,8 +1299,7 @@ p {
 
 .language-strip span,
 .song-stats span,
-.ending-songs span,
-.ritual-timeline span {
+.ending-songs span {
   display: inline-flex;
   align-items: center;
   min-height: 36px;
@@ -1623,7 +1622,8 @@ p {
 
 .page-finish {
   background:
-    radial-gradient(circle at 50% 10%, rgba(215, 255, 56, 0.08), transparent 24rem),
+    radial-gradient(circle at 50% 10%, rgba(0, 212, 255, 0.1), transparent 24rem),
+    radial-gradient(circle at 82% 24%, rgba(45, 248, 160, 0.08), transparent 22rem),
     linear-gradient(180deg, #020203, #060607 70%);
 }
 
@@ -1644,8 +1644,8 @@ p {
 }
 
 .mood-selector button.active {
-  border-color: rgba(215, 255, 56, 0.7);
-  background: rgba(215, 255, 56, 0.12);
+  border-color: rgba(45, 248, 160, 0.7);
+  background: rgba(45, 248, 160, 0.12);
 }
 
 .mood-selector button strong {
@@ -1663,7 +1663,8 @@ p {
   align-content: center;
   min-height: 420px;
   background:
-    radial-gradient(circle at 70% 35%, rgba(215, 255, 56, 0.11), transparent 18rem),
+    radial-gradient(circle at 70% 35%, rgba(0, 212, 255, 0.12), transparent 18rem),
+    radial-gradient(circle at 18% 76%, rgba(45, 248, 160, 0.08), transparent 16rem),
     rgba(255, 255, 255, 0.035);
 }
 
@@ -1678,6 +1679,30 @@ p {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 18px;
+}
+
+.recommended-song {
+  display: grid;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 212, 255, 0.34);
+  border-radius: 8px;
+  background: rgba(0, 212, 255, 0.08);
+  box-shadow: 0 0 24px rgba(0, 212, 255, 0.08);
+}
+
+.recommended-song span {
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.recommended-song strong {
+  color: var(--text);
+  font-size: clamp(1rem, 2vw, 1.3rem);
 }
 
 .affirmation-grid {
@@ -1701,24 +1726,131 @@ p {
 }
 
 .affirmation-grid button.revealed {
-  border-color: rgba(215, 255, 56, 0.6);
-  box-shadow: 0 0 34px rgba(215, 255, 56, 0.12);
+  border-color: rgba(45, 248, 160, 0.6);
+  box-shadow: 0 0 34px rgba(45, 248, 160, 0.12);
 }
 
 .affirmation-grid span {
   line-height: 1.5;
 }
 
-.ritual-timeline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
+.ritual-builder {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+  gap: 18px;
   margin-top: 28px;
-  padding: 20px;
+}
+
+.ritual-live-card,
+.ritual-timeline {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.035);
+}
+
+.ritual-live-card {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  min-height: 280px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(45, 248, 160, 0.1), transparent 15rem),
+    rgba(255, 255, 255, 0.04);
+}
+
+.ritual-live-card h3 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3.4rem);
+  line-height: 0.94;
+}
+
+.ritual-live-card > span {
+  width: fit-content;
+  padding: 8px 10px;
+  border: 1px solid rgba(0, 212, 255, 0.36);
+  border-radius: 999px;
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.ritual-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.ritual-controls button,
+.ritual-timeline button {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ritual-controls button {
+  padding: 10px 12px;
+  text-transform: uppercase;
+}
+
+.ritual-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 18px;
+}
+
+.ritual-progress {
+  grid-column: 1 / -1;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ritual-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.24);
+  transition: width 260ms ease;
+}
+
+.ritual-timeline button {
+  display: grid;
+  gap: 8px;
+  min-height: 132px;
+  padding: 16px;
+  text-align: left;
+  transition: 220ms ease;
+}
+
+.ritual-timeline button small {
+  color: var(--green);
+  font-weight: 900;
+}
+
+.ritual-timeline button strong {
+  text-transform: uppercase;
+}
+
+.ritual-timeline button span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.ritual-timeline button.active {
+  border-color: rgba(0, 212, 255, 0.6);
+  box-shadow: 0 0 24px rgba(0, 212, 255, 0.12);
+}
+
+.ritual-timeline button.complete {
+  border-color: rgba(45, 248, 160, 0.6);
+  background: rgba(45, 248, 160, 0.1);
 }
 
 .wireframe-route {
@@ -1914,6 +2046,7 @@ p {
   .beat-layout,
   .movement-layout,
   .finish-layout,
+  .ritual-builder,
   .wireframe-page .wf-nav-note {
     grid-template-columns: 1fr;
   }
@@ -1929,6 +2062,10 @@ p {
 
   .metric-grid,
   .affirmation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ritual-timeline {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1990,6 +2127,7 @@ p {
   .metric-grid,
   .movement-grid,
   .affirmation-grid,
+  .ritual-timeline,
   .song-result-card,
   .playlist-item,
   .wf-row {
